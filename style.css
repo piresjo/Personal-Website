@@ -60,3 +60,19 @@ h1 {
   text-align: center;
   font-family: "Alike Angular", serif;
 }
+
+table {
+    border-collapse: collapse
+}
+
+th {
+    text-align: center
+}
+
+td {
+    text-align: left
+}
+
+table, th, td {
+    border: 1px solid black;
+}
