@@ -19,10 +19,10 @@ class BackgroundStarfield {
 		this.canvas = null;
 		this.width = 0;
 		this.height = 0;
-		this.minVelocity = 15;
-		this.maxVelocity = 30;
+		this.minimumVelocity = 15;
+		this.maximumVelocity = 30;
 		this.stars = 100;
-		this.intervalId = 0;
+		this.interval = 0;
 	}
 
 	init(div) {
@@ -51,49 +51,50 @@ class BackgroundStarfield {
 		var stars = [];
 		for (var i = 0; i < this.stars; i++) {
 			stars[i] = new Star(Math.random()*this.width, Math.random()*this.height, Math.random()*3+1,
-		 		(Math.random()*(this.maxVelocity - this.minVelocity))+this.minVelocity);
+		 		(Math.random()*(this.maximumVelocity - this.minimumVelocity))+this.minimumVelocity);
 		}
 		this.stars = stars;
 
 		var self = this;
 		//	Start the timer.
-		this.intervalId = setInterval(function() {
+		this.interval = setInterval(function() {
 			self.update();
 			self.draw();	
 		}, 1000 / this.fps);
 	}
 
 	end() {
-		clearInterval(this.intervalId);
+		clearInterval(this.interval);
 	}
 
 	update() {
 		var dt = 1 / this.fps;
 
-		for(var i=0; i<this.stars.length; i++) {
+		for(var i = 0; i < this.stars.length; i++) {
 			var star = this.stars[i];
 			star.y += dt * star.velocity;
 			//	If the star has moved from the bottom of the screen, spawn it at the top.
-			if(star.y > this.height) {
-				this.stars[i] = new Star(Math.random()*this.width, 0, Math.random()*3+1, 
-			 	(Math.random()*(this.maxVelocity - this.minVelocity))+this.minVelocity);
+			if (star.y > this.height) {
+				this.stars[i] = new Star(Math.random() * this.width, 0, Math.random() * 3 + 1, 
+				(Math.random() * (this.maximumVelocity - this.minimumVelocity)) + this.minimumVelocity);
 			}
 		}
 	}
 
 	draw() {
 		//	Get the drawing context.
-		var ctx = this.canvas.getContext("2d");
+		var context = this.canvas.getContext("2d");
 
 		//	Draw the background.
-	 	ctx.fillStyle = '#000000';
-		ctx.fillRect(0, 0, this.width, this.height);
+		// 	Now it looks like a snowfield...I like it!
+	 	context.fillStyle = '#e3e3e3';
+		context.fillRect(0, 0, this.width, this.height);
 
-		//	Draw stars.
-		ctx.fillStyle = '#ffffff';
-		for(var i=0; i<this.stars.length;i++) {
+		//	Draw  the stars.
+		context.fillStyle = '#ffffff';
+		for(var i = 0; i < this.stars.length; i++) {
 			var star = this.stars[i];
-			ctx.fillRect(star.x, star.y, star.size, star.size);
+			context.fillRect(star.x, star.y, star.size, star.size);
 		}
 	}
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> Joe Pires </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="siteScript.js"></script>
+    <script src="background.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Alike+Angular"
       rel="stylesheet">
@@ -73,6 +73,15 @@
           Last Updated 27 April 2016
         </p>
       </div>
-
+      <div id="container"></div>
   </body>
+
+
+  <script>
+    //  Get the container and turn it into a starfield.
+    var container = document.getElementById('container');
+    var starfield = new BackgroundStarfield();
+    starfield.init(container);
+    starfield.begin();
+  </script>
 </html>
