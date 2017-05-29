@@ -61,6 +61,11 @@ h1 {
   font-family: "Alike Angular", serif;
 }
 
+#pdfLink {
+  color: #431c5d;
+  text-align: center;
+}
+
 table {
     border-collapse: collapse
 }

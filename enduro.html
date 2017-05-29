@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="eng-US">
+  <head>
+    <meta charset="UTF-8">
+    <title> Review - Enduro </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="pdfmake.js"></script>
+    <script src="vfs_fonts.js"></script>
+    <link type="text/css" rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Alike+Angular"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Asul" rel="stylesheet">
+  </head>
+
+  <body>
+      <div id="header">
+        <h1 id="name">Review - Enduro</h1>
+      </div>
+
+      <div id="links">
+        <ul id="linkTable">
+          <li id="homePage">
+            <a href="index.html">Back To Homepage</a>
+          </li>
+          <li id="writingsPage">
+            <a href="writings.html">Back To Writings</a>
+        </ul>
+      </div>
+
+      <div id="bodyText">
+
+        <p>
+          The Atari 2600 has many racing games in its library. <i>Enduro</i> stands out.
+        </p>
+        
+        <p>
+          Throughout the 2600’s lifespan, racing games were a common occurrence. Before 1980, the three big racing games were <i>Night Driving</i>, <i>Indy 500</i>, and <i>Street Racer</i>. All three were comparatively underwhelming. However, after the turn of the decade, the quality of racing games picked up, with Atari’s <i>Pole Position</i> and Activision’s <i>Enduro</i> being the two major racing releases.
+        </p> 
+
+        <p>
+          On the surface, <i>Enduro</i> behaves like its contemporaries on the 2600 and in the arcade. However, the game’s emphasis is less on racing, and more on driving. Within a day, your goal is to pass through a certain number of cars. If you hit a car, you do not lose a life. Rather, you are knocked back a few places. As each day passes, there are more cars to pass, the cars get harder to pass, and a combination of greater speed and finesse is needed to win.
+        </p>
+
+        <p>
+          This is, in fact, the main thrust of the game. It is what makes it so good. By shifting the emphasis on racing to an arcade-like driving experience, <i>Enduro</i> plays to the 2600’s strengths in simple arcade gaming. Given how much action goes on in a typical racing game, porting that straight over to the 2600 would end poorly. So, the change in gameplay lends to a fast-paced, smooth, and highly enjoyable experience. In fact, the combination of speed and avoidance-based gameplay lends the game a Zen-like element. Weaving through traffic and rolling down the highway kind of melts into a blur. However, gameplay never becomes monotonous.
+        </p>
+
+        <p>
+          Of course, there is more to the game than that.
+        </p>
+
+        <p>
+          To make the situation even better, there is some degree of variation in the day cycle. During each day cycle, there is a moment were your drive through a snowed-in valley, which reduces your control. There are also the night and early morning portions of the day, which reduce visibility. This helps keep the Zen-like element of the game while reducing monotony.
+        </p>
+
+        <p>
+          On top of that, for a 2600 game, <i>Enduro</i> is impressively engineered. As a machine with limited space and only 128 bytes of RAM, the sun setting in the background, in conjunction with the fast movement of the cars, is impressive. Sound is as expected of a 2600 game, which is neither to the game’s benefit or detriment. There is a minor hiccup, mainly with control. Surprisingly, the game does not use the paddle controller. Your car controls well enough with the joystick, however, so this is kind of a non-issue. It still would have been nice to have the option.
+        </p>
+
+        <p>
+          Sure, many racing and driving games have come out for the Atari 2600. However, <i>Enduro</i> stands out among those groups of games. Enduro is well worth your time, and possibly your money. 
+        </p> 
+      </div>
+
+      <div id="pdfLink">
+        PDF Link
+      </div>
+
+      <div id="footer">
+        <p>
+          Last Updated 20 February 2016
+        </p>
+      </div>
+  </body>
+  <script>
+    // I need to find a way to link this properly to the file
+    $("#pdfLink").click(function() {
+      var title = $('#header').text();
+      title = title.trim();
+
+      var articleText = $("#bodyText").html();
+      var articleTextRegex = /<i>|<\/i>|<strong>|<\/strong>/g;
+      articleText = articleText.replace(articleTextRegex, '');
+      var textRegex = /<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>/g;
+      var paragraphs = articleText.match(textRegex);
+      var paragraphObjectList = [];
+      for (var i = 0; i < paragraphs.length; i++) {
+        paragraphs[i] = paragraphs[i].replace(/<p>|<\/p>/g, '');
+        paragraphs[i] = paragraphs[i].trim();
+        var paragraphObject = {text: paragraphs[i], style: "body"};
+        paragraphObjectList.push(paragraphObject);
+      }
+      var docDef = {
+        pageSize: 'LETTER',
+
+        pageMargins: [ 50, 50, 50, 50 ],
+
+        
+        content: [
+          { text: "Joe Pires", style: "name" }, 
+          { text: " ", style: "spacing" }, 
+          { text: title, style: "title" }, 
+          { text: " ", style: "spacing" }
+          ],
+
+        styles: {
+          title: {
+            fontSize: 22,
+            bold: true,
+            alignment: 'center'
+          },
+          name: {
+            fontSize: 10,
+            bold: true,
+            alignment: 'center'
+          },
+          body: {
+            fontSize: 14,
+            bold: false,
+            alignment: 'left'
+          },
+          spacing: {
+            fontSize: 6,
+            alignment: 'center'
+          }
+        }
+      };
+      // Create the paragraphs
+      for (var m = 0; m < paragraphObjectList.length; m++) {
+        docDef.content.push(paragraphObjectList[m]);
+        var spacingObject = { text: " ", style: "spacing"};
+        docDef.content.push(spacingObject);
+      }
+      // Is there a specific process for going to ScholarlyCommons?
+      var fileName = title.replace(' ', '');
+      fileName = fileName + '.pdf';
+      pdfMake.createPdf(docDef).download(fileName);
+    });
+  </script>
+</html>

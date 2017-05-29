@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title> Review - Super Mario 3D Land </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="pdfmake.js"></script>
+    <script src="vfs_fonts.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Alike+Angular"
       rel="stylesheet">
@@ -113,11 +116,78 @@
 
       </div>
 
+      <div id="pdfLink">
+        PDF Link
+      </div>
+
       <div id="footer">
         <p>
           Last Updated 18 February 2016
         </p>
       </div>
-
   </body>
+  <script>
+    // I need to find a way to link this properly to the file
+    $("#pdfLink").click(function() {
+      var title = $('#header').text();
+      title = title.trim();
+      var articleText = $("#bodyText").html();
+      var articleTextRegex = /<i>|<\/i>|<strong>|<\/strong>/g;
+      articleText = articleText.replace(articleTextRegex, '');
+      var textRegex = /<\s*p[^>]*>([^<]*)<\s*\/\s*p\s*>/g;
+      var paragraphs = articleText.match(textRegex);
+      var paragraphObjectList = [];
+      for (var i = 0; i < paragraphs.length; i++) {
+        paragraphs[i] = paragraphs[i].replace(/<p>|<\/p>/g, '');
+        paragraphs[i] = paragraphs[i].trim();
+        var paragraphObject = {text: paragraphs[i], style: "body"};
+        paragraphObjectList.push(paragraphObject);
+      }
+      var docDef = {
+        pageSize: 'LETTER',
+
+        pageMargins: [ 50, 50, 50, 50 ],
+
+        
+        content: [
+          { text: "Joe Pires", style: "name" }, 
+          { text: " ", style: "spacing" }, 
+          { text: title, style: "title" }, 
+          { text: " ", style: "spacing" }
+          ],
+
+        styles: {
+          title: {
+            fontSize: 22,
+            bold: true,
+            alignment: 'center'
+          },
+          name: {
+            fontSize: 10,
+            bold: true,
+            alignment: 'center'
+          },
+          body: {
+            fontSize: 14,
+            bold: false,
+            alignment: 'left'
+          },
+          spacing: {
+            fontSize: 6,
+            alignment: 'center'
+          }
+        }
+      };
+      // Create the paragraphs
+      for (var m = 0; m < paragraphObjectList.length; m++) {
+        docDef.content.push(paragraphObjectList[m]);
+        var spacingObject = { text: " ", style: "spacing"};
+        docDef.content.push(spacingObject);
+      }
+      // Is there a specific process for going to ScholarlyCommons?
+      var fileName = title.replace(' ', '');
+      fileName = fileName + '.pdf';
+      pdfMake.createPdf(docDef).download(fileName);
+    });
+  </script>
 </html>
