@@ -1,0 +1,11 @@
+THIS NEEDS TO BE DONE ASAP.
+
+Anyway, this will be my professional website, perfect for whoring my miserable, corpulent self to capitalist interests.
+Here's what I'll need:
+
+- Home page - Should be rather slick, but nothing too overdone. Doubles as an about page
+- Resume - Likes to a PDF of my resume
+- Projects - Slickest of the sites, showcases some of my projects, including ones being worked on at the moment
+- Links: Just two: one to the github, the other to my email (the Penn email, obviously)
+
+Once a decent and working version is done, put it up through SEAS. Keep updating throughout the years.

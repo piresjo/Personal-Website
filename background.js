@@ -50,8 +50,8 @@ class BackgroundStarfield {
 		//	Create the stars.
 		var stars = [];
 		for (var i = 0; i < this.stars; i++) {
-			stars[i] = new Star(Math.random()*this.width, Math.random()*this.height, Math.random()*3+1,
-		 		(Math.random()*(this.maximumVelocity - this.minimumVelocity))+this.minimumVelocity);
+			stars[i] = new Star(Math.random() * this.width, Math.random() * this.height, Math.random() * 3 + 1,
+		 		(Math.random() * (this.maximumVelocity - this.minimumVelocity)) + this.minimumVelocity);
 		}
 		this.stars = stars;
 
