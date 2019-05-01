@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "A Better Pac-Man For The Game Boy"
+date:   2019-05-01 13:00:00 -0400
+---
+
+I've been going through Jeremy Parish's recent work on the Game Boy (which is quite fantastic, by the way, and you all should take a look at it). One of his episodes was on Namco's Game Boy port of Pac-Man (which, let's be honest, was most likely contracted out to some small studio).
+
+It's...okay, I guess. But there are three major problems with the game. First, the entire maze isn't on the screen at any given time. Worse, it not only scrolls along the y-axis (like, for instance, the Game Gear of Neo Geo Pocket Color versions), but also along the X-axis, which makes for a rather disorienting experience. By only seeing a small fraction of the screen at a time, it's impossible to, at a glance, determine where ghosts are and how to go about chipping away at the maze. Also, the original Game Boy screen was passive matrix, and all that scrolling is likely to give someone a migraine.
+
+Second, the proportions are way off for a Game Boy game. Parish was right when he said that this looked like a pixel-perfect adaptation of the NES Pac-Man (at least in terms of the size of everything). It's simply too big for the tiny Game Boy screen and resolution (which might explain the scrolling situation). A better experience would require the size of all sprites to be a bit more Game Boy appropriate, and enough so that there isn't much (if any, ideally) scrolling.
+
+Third, the game is incredibly sluggish. It's unknown whether or not this is due to the hardware (remember, the Game Boy was running on a Z80) or to help compensate for the added difficulty because of the scrolling.
+
+So, maybe it makes sense to develop a (slightly) better version of the Namco classic. Mainly, I'm doing this as a programming exercise (it's been a while since I've done anything significant in C, and I've never done a homebrew game before), but it'll be interesting to see what I can do.
